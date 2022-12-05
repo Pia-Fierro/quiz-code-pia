@@ -9,8 +9,8 @@
 </head>
 <body>
     <header>
-      <h3>View scores:</h3> 
-      <h3>Timer</h3> 
+      <div id="view-scores">View scores:</div> 
+      <h3><span id="timer"></span></h3> 
     </header>
 
     <main>
@@ -18,7 +18,7 @@
             <h1>Coding Quiz Challenge</h1>
             <p>Try to answer the following code-related questions withing the time limit.
             Keep in mind that incorrect answers will penalize your score time by ten seconds!</p>
-            <button>Start Quiz</button>
+            <button id="start-quiz-button">Start Quiz</button>
         </section>
 
         <section>
@@ -31,7 +31,7 @@
             <form>
                 <label>Enter initials</label>
                 <input type="text">
-                <button>Submit</button>
+                <button id="submit-button">Submit</button>
             </form>
         </section>
 
@@ -42,8 +42,8 @@
 
         <section>
             <h3>Highscores</h3>
-            <button>Go back</button>
-            <button>Clear Highscores</button>
+            <button id="go-back-btn">Go back</button>
+            <button id="clear-highscore">Clear Highscores</button>
         </section>
 
     </main>
