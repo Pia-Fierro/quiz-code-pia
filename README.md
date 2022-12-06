@@ -2,14 +2,15 @@
 
 ```
 AS A coding boot camp student
-I WANT to build a timed coding quiz with multiple-choice questions that stores high scores on JavaScript fundamentals.  
+I WANT to build a timed coding quiz with multiple-choice questions
+that stores high scores on JavaScript fundamentals.  
 SO THAT I can apply the knowledge from the JavaScript module.
 ```
 
 ## Acceptance Criteria
 
 ```
-GIVEN an animation that demonstrates the application functionality of code quiz.
+GIVEN an animation that demonstrates the functionality of code quiz.
 WHEN I built the application following the animation example
 THEN click the start button
 THEN a timer starts and I am presented with a question
