@@ -8,24 +8,37 @@
     <title>Quiz code Pia</title>
 </head>
 <body>
-    <header>
-      <div id="view-scores">View scores:</div> 
-      <h3><span id="timer"></span></h3> 
+
+    <!--top of screen with view scores option and time left-->
+    <header id="top-screen">
+      <div id="view-scores">View scores</div> 
+      <h3><span id="timer">0 s</span></h3> 
     </header>
 
     <main>
-        <section>
+        <!--start quiz screen-->
+        <section id="first-screen">
             <h1>Coding Quiz Challenge</h1>
             <p>Try to answer the following code-related questions withing the time limit.
             Keep in mind that incorrect answers will penalize your score time by ten seconds!</p>
             <button id="start-quiz-button">Start Quiz</button>
         </section>
 
-        <section>
-            <p>questions screen</p>
+        <!--questions screen-->
+        <section id="questions-screen" class="hide">
+            <h2 id="questions"></h2>
+            <div id="choices">
+                <ul class="button">
+                    <li><button class=btn></button></li>
+                    <li><button class=btn></button></li>
+                    <li><button class=btn></button></li>
+                    <li><button class=btn></button></li>
+                </ul>
+            </div>  
         </section>
 
-        <section>
+        <!--finish screen-->
+        <section id="finish-screen" class="hide">
             <h2>All done!</h2>
             <h3><spam id="final-score"></spam>your finele score is:</h3>
             <form>
@@ -35,13 +48,13 @@
             </form>
         </section>
 
-        <section>
-            <h2>Highscores</h2>
-            <p>show inicitals and Highscores result</p>
-        </section>
-
-        <section>
-            <h3>Highscores</h3>
+        <!--score screen with go back to start button and clear record button-->
+        <section id="score-screen" class="hide">
+            <h2 id="high-scores'">Highscores</h2>
+            <ul class="user-scores">
+                <li id="save-initials"></li>
+                <li id="save-score"></li>
+            </ul>
             <button id="go-back-btn">Go back</button>
             <button id="clear-highscore-btn">Clear Highscores</button>
         </section>
