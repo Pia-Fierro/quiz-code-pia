@@ -14,7 +14,7 @@ GIVEN an animation that demonstrates the functionality of code quiz.
 WHEN I built the application following the animation example
 THEN click the start button
 THEN a timer starts and I am presented with a question
-WHEN I answer a question
+WHEN I answer the question
 THEN I am presented with another question
 WHEN I answer a question incorrectly
 THEN time is subtracted from the clock

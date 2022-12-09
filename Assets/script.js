@@ -5,6 +5,7 @@ var timer = document.querySelector("#timer");
 var firstScreen = document.querySelector("#first-screen");
 var startQuizButton = document.querySelector("#start-quiz-button");
 var questionsScreen = document.querySelector("#questions-screen");
+var choicesList = document.querySelector("#choices");
 var finishScreen = document.querySelector("#finish-screen");
 var finaleScore= document.querySelector("#finale-score");
 var submitButton = document.querySelector("#submit-button");
@@ -48,14 +49,13 @@ var questions = [
 
 //function declarations for the quizz timer and render questions:
 
-//first screen to start quizz
+//first screen to start quizz. After pressing start first screen will hide, timer will start and questions screen will show
 function startQuiz () {
     firstScreen.classList.add("hide");
     questionsScreen.classList.remove("hide");
     setTimer();
     renderQuestions();
 }
-
 //start the quiz when presing star button:
 startQuizButton.addEventListener("click",startQuiz); 
 
@@ -70,7 +70,7 @@ function setTimer () {
         timer.textContent=""
         endQuiz();
     }
-    if (timeLeft===questions.length) {
+    if (currentQuestionsIndex===questions.length) {
         clearInterval(timerCount);
         timer.textContent=""
         endQuiz();
@@ -78,7 +78,7 @@ function setTimer () {
     }, 1000);
 }
 
-//function to render questionns after pressing start button.
+//function to start showing questionns after pressing start button.
 function renderQuestions() {
     scoreScreen.classList.add("hide");
     
@@ -87,15 +87,42 @@ function renderQuestions() {
     titleEl.textContent = currentQuestions;
 
     for (i = 0; i < questions[currentQuestionsIndex].options.length; i++) {
-    var buttonEl = document.getElementById ("button" + (i + 1));
+    var buttonEl = document.getElementById ("answer-options" + (i + 1));
     buttonEl.textContent = questions[currentQuestionsIndex].options[i];
     buttonEl.addEventListener("click", answerCheck)
+   
     }
 }
+//function that will check if the user answer is the correct answer for each question
+function answerCheck (event) {
+    var userChoice = event.target.textContent;
+    if (userChoice === questions[currentQuestionsIndex].answer) {
 
-function answerCheck () {
+    //creating an element to show correct or wrong answer
+        var CorrectAnswer = document.createElement ("p");
+        CorrectAnswer.textContent = "Correct answer!!";
+        document.getElementById("choices").appendChild(CorrectAnswer);
+        CorrectAnswer.setAttribute("id","correctAnswer");
 
-}
+    }else {
+        var wrongAnswer = document.createElement ("p");
+        wrongAnswer.textContent = "Wrong asnwer";
+        document.getElementById ("choices").appendChild(wrongAnswer);
+        wrongAnswer.setAttribute("id", "wrongAnswer");
+        //user will loose 10s for each wrong answer
+        timeLeft = timeLeft -10;
+     }
+
+     currentQuestionsIndex = currentQuestionsIndex + 1;
+     if (questions.length > currentQuestionsIndex) {
+        renderQuestions();
+
+     }else {
+        clearInterval(timerCount);
+        endQuiz();
+     }
+     }
+      
 
 //funtion for when the time gets to 0 or when all the answer are aswered before the timer reach to 0 s.
 function endQuiz() {
