@@ -93,23 +93,15 @@ function renderQuestions() {
    
     }
 }
-//function that will check if the user answer is the correct answer for each question
+//function that will check if the user answer is the correct/incorrect one for each question
 function answerCheck (event) {
     var userChoice = event.target.textContent;
     if (userChoice === questions[currentQuestionsIndex].answer) {
-
-    //creating an element to show correct or wrong answer
-        var CorrectAnswer = document.createElement ("p");
-        CorrectAnswer.textContent = "Correct answer!!";
-        document.getElementById("choices").appendChild(CorrectAnswer);
-        CorrectAnswer.setAttribute("id","correctAnswer");
+        document.getElementById("correct-wrong").textContent ="correct answer, good job!!";
 
     }else {
-        var wrongAnswer = document.createElement ("p");
-        wrongAnswer.textContent = "Wrong asnwer";
-        document.getElementById ("choices").appendChild(wrongAnswer);
-        wrongAnswer.setAttribute("id", "wrongAnswer");
-        //user will loose 10s for each wrong answer
+        document.getElementById("correct-wrong").textContent="wrong answer, you lose 10 seconds.";
+        //user lose 10 seconds for each wrong answer
         timeLeft = timeLeft -10;
      }
 
