@@ -17,9 +17,12 @@ var goBackButton = document.querySelector("#go-back-btn");
 var clearHighScoreButton = document.querySelector("#clear-highscore-btn");
 
 var timer;
+var timerEl;
 var timerCount;
 var questionsIndex = 0;
 var userInitials ="";
+var scoreList;
+var div;
 
 
 // questions array:
@@ -50,8 +53,6 @@ var questions = [
     answer: "console.log"
 }
 ];
-
-//function declarations for the quizz timer and render questions:
 
 //first screen to start quizz. After pressing start first screen will hide, timer will start and questions screen will show
 function startQuiz () {
@@ -129,26 +130,60 @@ function endQuiz() {
     timerEl.classList.add("hide");
 
     var scoreEl = document.getElementById ("final-score")
-    scoreEl.textContent = "your score is: "+ timerCount + "s";  
+    scoreEl.textContent = "your score is: "+ timerCount + "s"; 
+    //store users score in local storage 
     localStorage.setItem("score",JSON.stringify(timerCount));
 }
-//
-function saveScore (event) {
+//funtion for user to add initials and to storage results in local storage
+ function saveScore (event) {
     event.preventDefault();
     event.stopPropagation();
     questionsScreen.classList.add("hide");
     finishScreen.classList.remove("hide");
     viewScores.classList.add("hide");
     timerEl.classList.add("hide");
-    userInitials = document.getElementById("initials").value
+    userInitials = document.getElementById("initials").value;
     if (userInitials == "") {
         alert("Please enter your initials");
         return endQuiz;
        }
-    localStorage.setItem("initials",JSON.stringify(userInitials))     
+    localStorage.setItem("initials",userInitials);
+    renderMessage();     
 }
 submitButton.addEventListener("click", saveScore);
 
+function renderMessage () {
+    questionsScreen.classList.add("hide");
+    finishScreen.classList.add("hide");
+    viewScores.classList.add("hide");
+    timerEl.classList.add("hide");
+    scoreScreen.classList.remove("hide");
+    userInitials = localStorage.getItem("initials");
+    score =JSON.parse(localStorage.getItem("score"));
+    document.getElementById("saved-initials").innerHTML = userInitials;
+    div = "------";
+    document.getElementById("div").innerHTML = div;
+    document.getElementById("saved-score").innerHTML = timerCount;
+  }
 
+function goBack () {
+    firstScreen.classList.remove("hide");
+    questionsScreen.classList.add("hide");
+    scoreScreen.classList.add("hide");
+    finishScreen.classList.add("hide");
+    viewScores.classList.remove("hide");
+    timerEl.classList.remove("hide");
+    timerEl.textContent = "time: " + 75;
+    questionsIndex = 0;
+ } 
+ goBackButton.addEventListener("click", goBack);
 
-
+ function deleteScore () {
+    localStorage.clear();
+    questionsScreen.classList.add("hide");
+    finishScreen.classList.add("hide");
+    viewScores.classList.add("hide");
+    timerEl.classList.add("hide");
+    scoreScreen.classList.remove("hide");
+}
+clearHighScoreButton.addEventListener("click",deleteScore);
