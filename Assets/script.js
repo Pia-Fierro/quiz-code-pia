@@ -17,6 +17,8 @@ var clearHighScoreButton = document.querySelector("#clear-highscore-btn");
 var timerCount;
 var timeLeft = 75;
 var currentQuestionsIndex = 0;
+var correctAnswer = 0;
+var score = 0;
 
 // questions array:
 var questions = [
@@ -115,11 +117,14 @@ function answerCheck (event) {
      }
      }
       
-
 //funtion for when the time gets to 0 or when all the answer are aswered before the timer reach to 0 s.
 function endQuiz() {
-    localStorage.setItem("score",JSON.stringify(score));
-    finaleScore.textContent = score
+    //remove question screen and show finish screen
+    questionsScreen.classList.add("hide");
+    finishScreen.classList.remove("hide");
+
+     var scoreEl =getElementById("final-score");
+     scoreEl.textContent = timerCount + ".";  
 }
 
 
