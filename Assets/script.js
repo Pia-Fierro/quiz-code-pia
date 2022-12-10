@@ -1,24 +1,25 @@
 //variables declaration in gloval scope.
 var topScreen = document.querySelector("#topScreen");
-var viewScores = document.querySelector("#view-scores");
-var timer = document.querySelector("#timer");
 var firstScreen = document.querySelector("#first-screen");
-var startQuizButton = document.querySelector("#start-quiz-button");
 var questionsScreen = document.querySelector("#questions-screen");
-var choicesList = document.querySelector("#choices");
-var finishScreen = document.querySelector("#finish-screen");
-var finaleScore= document.querySelector("#finale-score");
-var submitButton = document.querySelector("#submit-button");
 var scoreScreen = document.querySelector("#score-screen");
+var finishScreen = document.querySelector("#finish-screen");
+
+var viewScores = document.querySelector("#view-scores");
+var timerEl = document.querySelector("#timer-count");
+var choicesList = document.querySelector("#choices");
 var highScores = document.querySelector("#high-scores");
+
+
+var startQuizButton = document.querySelector("#start-quiz-button");
+var submitButton = document.querySelector("#submit-button");
 var goBackButton = document.querySelector("#go-back-btn");
 var clearHighScoreButton = document.querySelector("#clear-highscore-btn");
 
+var timer;
 var timerCount;
-var timeLeft = 75;
 var currentQuestionsIndex = 0;
-var correctAnswer = 0;
-var score = 0;
+
 
 // questions array:
 var questions = [
@@ -55,6 +56,7 @@ var questions = [
 function startQuiz () {
     firstScreen.classList.add("hide");
     questionsScreen.classList.remove("hide");
+    timerCount = 75;
     setTimer();
     renderQuestions();
 }
@@ -63,22 +65,23 @@ startQuizButton.addEventListener("click",startQuiz);
 
 //function that creates the timer
 function setTimer () {
-    var timerCount = setInterval(function() {
-    timer.textContent =timeLeft + "s";
-    timeLeft= timeLeft - 1;
-    if (timeLeft===0) {
-        //clear timer and stop function
-        clearInterval(timerCount);
-        timer.textContent=""
-        endQuiz();
-    }
-    if (currentQuestionsIndex===questions.length) {
-        clearInterval(timerCount);
-        timer.textContent=""
-        endQuiz();
-    }    
+    clearInterval(timer)
+     timer = setInterval (function() {
+        timerCount --;
+        timerEl.textContent = "Time left:" + timerCount + "s";
+
+        if (timerCount === 0) {
+            clearInterval (timer);
+            endQuiz();
+        }
+        if (currentQuestionsIndex === questions.length) {
+            clearInterval (timer);
+            endQuiz ()
+        }
     }, 1000);
 }
+
+
 
 //function to start showing questionns after pressing start button.
 function renderQuestions() {
@@ -104,7 +107,7 @@ function answerCheck (event) {
     }else {
         document.getElementById("correct-wrong").textContent="wrong answer, you lose 10 seconds.";
         //user lose 10 seconds for each wrong answer
-        timeLeft = timeLeft -10;
+        timerCount -= 10;
      }
 
      currentQuestionsIndex = currentQuestionsIndex + 1;
@@ -122,9 +125,11 @@ function endQuiz() {
     //remove question screen and show finish screen
     questionsScreen.classList.add("hide");
     finishScreen.classList.remove("hide");
+    viewScores.classList.add("hide");
+    timerEl.classList.add("hide");
 
-     var scoreEl =getElementById("final-score");
-     scoreEl.textContent = timerCount + ".";  
+    var scoreEl = document.getElementById ("final-score")
+    scoreEl.textContent = "your score is: "+ timerCount + "s";  
 }
 
 
