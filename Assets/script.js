@@ -9,7 +9,7 @@ var viewScores = document.querySelector("#view-scores");
 var timerEl = document.querySelector("#timer-count");
 var choicesList = document.querySelector("#choices");
 var highScores = document.querySelector("#high-scores");
-
+var titleEl = document.getElementById("questions");
 
 var startQuizButton = document.querySelector("#start-quiz-button");
 var submitButton = document.querySelector("#submit-button");
@@ -18,13 +18,13 @@ var clearHighScoreButton = document.querySelector("#clear-highscore-btn");
 
 var timer;
 var timerCount;
-var currentQuestionsIndex = 0;
+var questionsIndex = 0;
 
 
 // questions array:
 var questions = [
 {
-    title:"Commonly used data types do not include:",
+    title: "Commonly used data types do not include:",
     options: ["alerts","booleans", "numbers", "strings"],
     answer: "alerts"
 },
@@ -48,7 +48,7 @@ var questions = [
     options: ["JavaScript", "terminal/bash","for loops","console.log"],
     answer: "console.log"
 }
-]
+];
 
 //function declarations for the quizz timer and render questions:
 
@@ -70,30 +70,29 @@ function setTimer () {
         timerCount --;
         timerEl.textContent = "Time left:" + timerCount + "s";
 
+        //conditions to finish the quiz: when time finish or when all the questions are answered. 
         if (timerCount === 0) {
             clearInterval (timer);
             endQuiz();
         }
-        if (currentQuestionsIndex === questions.length) {
+        if (questionsIndex === questions.length) {
             clearInterval (timer);
             endQuiz ()
         }
     }, 1000);
 }
 
-
-
 //function to start showing questionns after pressing start button.
 function renderQuestions() {
     scoreScreen.classList.add("hide");
     
-    var currentQuestions = questions[currentQuestionsIndex].title;
+    var currentQuestions = questions[questionsIndex].title;
     var titleEl = document.getElementById("questions");
     titleEl.textContent = currentQuestions;
 
-    for (i = 0; i < questions[currentQuestionsIndex].options.length; i++) {
+    for (i = 0; i < questions[questionsIndex].options.length; i++) {
     var buttonEl = document.getElementById ("answer-options" + (i + 1));
-    buttonEl.textContent = questions[currentQuestionsIndex].options[i];
+    buttonEl.textContent = questions[questionsIndex].options[i];
     buttonEl.addEventListener("click", answerCheck)
    
     }
@@ -101,17 +100,17 @@ function renderQuestions() {
 //function that will check if the user answer is the correct/incorrect one for each question
 function answerCheck (event) {
     var userChoice = event.target.textContent;
-    if (userChoice === questions[currentQuestionsIndex].answer) {
+    if (userChoice === questions[questionsIndex].answer) {
         document.getElementById("correct-wrong").textContent ="correct answer, good job!!";
 
     }else {
         document.getElementById("correct-wrong").textContent="wrong answer, you lose 10 seconds.";
         //user lose 10 seconds for each wrong answer
-        timerCount -= 10;
+        timerCount = timerCount - 10;
      }
 
-     currentQuestionsIndex = currentQuestionsIndex + 1;
-     if (questions.length > currentQuestionsIndex) {
+     questionsIndex = questionsIndex + 1;
+     if (questions.length >= questionsIndex) {
         renderQuestions();
 
      }else {
@@ -131,9 +130,23 @@ function endQuiz() {
     var scoreEl = document.getElementById ("final-score")
     scoreEl.textContent = "your score is: "+ timerCount + "s";  
 }
+//
+submitButton.addEventListener("click",function (event){
+    questionsScreen.classList.add("hide");
+    finishScreen.classList.remove("hide");
+    viewScores.classList.add("hide");
+    timerEl.classList.add("hide");
+    event.preventDefault();
 
+})
 
-
-
+function saveScore () {
+   var userInitials = document.querySelector("#initials");
+   
+   if (userInitials == "") {
+    alert("Please enter your initials")
+    return;
+   }
+}
 
 
