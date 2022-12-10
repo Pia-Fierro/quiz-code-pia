@@ -19,6 +19,7 @@ var clearHighScoreButton = document.querySelector("#clear-highscore-btn");
 var timer;
 var timerCount;
 var questionsIndex = 0;
+var userInitials ="";
 
 
 // questions array:
@@ -129,24 +130,25 @@ function endQuiz() {
 
     var scoreEl = document.getElementById ("final-score")
     scoreEl.textContent = "your score is: "+ timerCount + "s";  
+    localStorage.setItem("score",JSON.stringify(timerCount));
 }
 //
-submitButton.addEventListener("click",function (event){
+function saveScore (event) {
+    event.preventDefault();
+    event.stopPropagation();
     questionsScreen.classList.add("hide");
     finishScreen.classList.remove("hide");
     viewScores.classList.add("hide");
     timerEl.classList.add("hide");
-    event.preventDefault();
-
-})
-
-function saveScore () {
-   var userInitials = document.querySelector("#initials");
-   
-   if (userInitials == "") {
-    alert("Please enter your initials")
-    return;
-   }
+    userInitials = document.getElementById("initials").value
+    if (userInitials == "") {
+        alert("Please enter your initials");
+        return endQuiz;
+       }
+    localStorage.setItem("initials",JSON.stringify(userInitials))     
 }
+submitButton.addEventListener("click", saveScore);
+
+
 
 
