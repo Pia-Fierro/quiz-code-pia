@@ -9,6 +9,7 @@ var viewScores = document.querySelector("#view-scores");
 var timerEl = document.querySelector("#timer-count");
 var choicesList = document.querySelector("#choices");
 var highScores = document.querySelector("#high-scores");
+var scoreList = document.createElement("ul")
 var titleEl = document.getElementById("questions");
 
 var scoreButton = document.querySelector("#score-button");
@@ -22,8 +23,9 @@ var timerEl;
 var timerCount;
 var questionsIndex = 0;
 var userInitials;
-var scoreList;
-var div;
+var scoreList = [];
+var scoresPerInitials;
+
 
 
 // questions array:
@@ -88,7 +90,8 @@ function setTimer () {
 //function to start showing questionns after pressing start button.
 function renderQuestions() {
     scoreScreen.classList.add("hide");
-    
+    console.log(questions[questionsIndex].title)
+    console.log(questionsIndex)
     var currentQuestions = questions[questionsIndex].title;
     var titleEl = document.getElementById("questions");
     titleEl.textContent = currentQuestions;
@@ -103,6 +106,7 @@ function renderQuestions() {
 //function that will check if the user answer is the correct/incorrect one for each question
 function answerCheck (event) {
     var userChoice = event.target.textContent;
+    console.log(questionsIndex)
     if (userChoice === questions[questionsIndex].answer) {
         document.getElementById("correct-wrong").textContent ="correct answer, good job!!";
 
@@ -113,7 +117,7 @@ function answerCheck (event) {
      }
 
      questionsIndex = questionsIndex + 1;
-     if (questions.length >= questionsIndex) {
+     if (questions.length > questionsIndex) {
         renderQuestions();
 
      }else {
@@ -154,7 +158,8 @@ function endQuiz() {
         score: timerCount,
        };
     localStorage.setItem("user",JSON.stringify (user));
-    renderMessage();     
+    renderMessage();  
+    console.log("saving the results 1")   
 }
 submitButton.addEventListener("click", saveScore);
 
@@ -167,6 +172,22 @@ function renderMessage () {
     scoreScreen.classList.remove("hide");
     var lastGrade = JSON.parse(localStorage.getItem("user"));
     document.getElementById("div").innerHTML= lastGrade.initials + "----- " + lastGrade.score + "points.";
+    
+    scoresPerInitials= document.createElement("li")
+    console.log("li")
+
+    scoreList.appendChild(scoresPerInitials)
+    console.log(scoresPerInitials)
+    
+    highScores.appendChild(scoreList)
+
+    scoresPerInitials.textContent = user;
+
+
+    //scorePerinitials = document.createElement("li")
+    //scoreList.appendChild(scorePerinitials)
+    //scorePerinitials.textContent = initials + "----------" + finalScore.textContent
+    console.log("showing what is saved in local storage " + lastGrade);
   }
 
   //function to go back to the begginig when pressing go back button
@@ -195,6 +216,7 @@ clearHighScoreButton.addEventListener("click",deleteScore);
 scoreButton.addEventListener("click",function(){
     if (localStorage !=0) {
         renderMessage();
+
         firstScreen.classList.add("hide");
     } 
     });
