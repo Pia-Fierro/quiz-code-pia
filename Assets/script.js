@@ -9,7 +9,7 @@ var viewScores = document.querySelector("#view-scores");
 var timerEl = document.querySelector("#timer-count");
 var choicesList = document.querySelector("#choices");
 var highScores = document.querySelector("#high-scores");
-var scoreList = document.createElement("ul")
+//var scoreList = document.createElement("ul")
 var titleEl = document.getElementById("questions");
 
 var scoreButton = document.querySelector("#score-button");
@@ -23,7 +23,7 @@ var timerEl;
 var timerCount;
 var questionsIndex = 0;
 var userInitials;
-var scoreList = [];
+var scoreList = JSON.parse(localStorage.getItem("user")) || [];
 var scoresPerInitials;
 
 
@@ -147,19 +147,19 @@ function endQuiz() {
     viewScores.classList.add("hide");
     timerEl.classList.add("hide");
     
-    var userInitials = document.getElementById("initials");
+    var userInitials = document.getElementById("initials").value;
     if (userInitials === "") {
         alert("Please enter your initials");
         return endQuiz;
        }
-       userInitials
+       //userInitials and scores
        var user = {
-        initials: userInitials.value,
+        initials: userInitials,
         score: timerCount,
        };
-    localStorage.setItem("user",JSON.stringify (user));
-    renderMessage();  
-    console.log("saving the results 1")   
+       scoreList.push(user);
+    localStorage.setItem("user",JSON.stringify (scoreList));
+    renderMessage();    
 }
 submitButton.addEventListener("click", saveScore);
 
@@ -170,24 +170,14 @@ function renderMessage () {
     viewScores.classList.add("hide");
     timerEl.classList.add("hide");
     scoreScreen.classList.remove("hide");
-    var lastGrade = JSON.parse(localStorage.getItem("user"));
-    document.getElementById("div").innerHTML= lastGrade.initials + "----- " + lastGrade.score + "points.";
-    
-    scoresPerInitials= document.createElement("li")
-    console.log("li")
+    document.getElementById("score-list").innerHTML = '';
 
-    scoreList.appendChild(scoresPerInitials)
-    console.log(scoresPerInitials)
-    
-    highScores.appendChild(scoreList)
-
-    scoresPerInitials.textContent = user;
-
-
-    //scorePerinitials = document.createElement("li")
-    //scoreList.appendChild(scorePerinitials)
-    //scorePerinitials.textContent = initials + "----------" + finalScore.textContent
-    console.log("showing what is saved in local storage " + lastGrade);
+    for (let i = 0; i < scoreList.length; i++) {
+        const lastGrade = scoreList[i];
+        scoresPerInitials= document.createElement("li")
+        scoresPerInitials.textContent = lastGrade.initials + "----- " + lastGrade.score + "points.";
+        document.getElementById("score-list").appendChild(scoresPerInitials)  
+    }
   }
 
   //function to go back to the begginig when pressing go back button
@@ -204,20 +194,16 @@ function goBack () {
  goBackButton.addEventListener("click", goBack);
 
 //function to erase user quiz data from local storage when pressing clear scores button
- function deleteScore () {
-    localStorage.clear();
-    document.getElementById("saved-initials"). innerHTML = "";
-    document.getElementById("div").innerHTML = "";
-    document.getElementById("saved-score").innerHTML = "";
-}
-clearHighScoreButton.addEventListener("click",deleteScore);
 
+clearHighScoreButton.addEventListener("click",function (){
+    localStorage.clear();
+    document.getElementById("score-list").innerHTML = '';
+});
 
 scoreButton.addEventListener("click",function(){
     if (localStorage !=0) {
         renderMessage();
-
-        firstScreen.classList.add("hide");
-    } 
+    }
+    firstScreen.classList.add("hide");
     });
 
