@@ -28,4 +28,5 @@ THEN I can save my initials and my score
 ![Code quiz](./Assets/images/screenshot.jpg)
 
 # Link to deploy application
+[https://pia-fierro.github.io/quiz-code-pia/](https://pia-fierro.github.io/quiz-code-pia/)
 

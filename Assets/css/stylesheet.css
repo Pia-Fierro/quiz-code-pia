@@ -67,14 +67,13 @@ main {
     margin-left: 200px;
 }
 .btn{
-    background: rgb(229, 224, 166);
+    background:rgb(229, 224, 166);
     border-radius: 5px;
-    font-size:medium;
+    font-size: medium;
     max-width: 250px;
     padding: 10px 10px;
     margin-bottom: 15px;
-    text-align: center;
-
+    background: rgb(229, 224, 166);
 }
 
  ul{
