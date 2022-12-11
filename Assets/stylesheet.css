@@ -18,7 +18,7 @@ header {
 }
 
 .top-screen-style {
-    background-color: rgb(229, 224, 166);
+    background-color:rgb(229, 224, 166) ;
     padding: 20px;
     border-radius: 10px;
 }
@@ -37,30 +37,44 @@ main {
 
 #first-screen {
     border-style: solid;
-    border-color: antiquewhite;
+    border-color: rgb(229, 224, 166);
+    border-width: 1em;
     width: 70%;
     margin-left: 200px;
 }
 
 #questions-screen {
     border-style: solid;
-    border-color: antiquewhite;
+    border-color: rgb(229, 224, 166);
+    border-width: 1em;
     width: 70%;
     margin-left: 200px;
 }
 
 #finish-screen {
     border-style: solid;
-    border-color: antiquewhite;
+    border-color:rgb(229, 224, 166);
+    border-width: 1em;
     width: 70%;
     margin-left: 200px;
 }
 
 #score-screen{
     border-style: solid;
-    border-color: antiquewhite;
+    border-color: rgb(229, 224, 166);
+    border-width: 1em;
     width: 70%;
     margin-left: 200px;
+}
+.btn{
+    background: rgb(229, 224, 166);
+    border-radius: 5px;
+    font-size:medium;
+    max-width: 250px;
+    padding: 10px 10px;
+    margin-bottom: 15px;
+    text-align: center;
+
 }
 
  ul{

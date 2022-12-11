@@ -89,8 +89,6 @@ function setTimer () {
 //function to start showing questionns after pressing start button.
 function renderQuestions() {
     scoreScreen.classList.add("hide");
-    console.log(questions[questionsIndex].title)
-    console.log(questionsIndex)
     var currentQuestions = questions[questionsIndex].title;
     var titleEl = document.getElementById("questions");
     titleEl.textContent = currentQuestions;
@@ -105,7 +103,7 @@ function renderQuestions() {
 //function that will check if the user answer is the correct/incorrect one for each question
 function answerCheck (event) {
     var userChoice = event.target.textContent;
-    console.log(questionsIndex)
+    
     if (userChoice === questions[questionsIndex].answer) {
         document.getElementById("correct-wrong").textContent ="correct answer, good job!!";
 
@@ -125,7 +123,7 @@ function answerCheck (event) {
      }
      }
       
-//funtion for when the time gets to 0 or when all the answer are aswered before the timer reach to 0 s.
+//funtion to end the quizz when the time gets to 0 or when all the answer are aswered before the timer reach to 0 s.
 function endQuiz() {
     //remove question screen and show finish screen
     questionsScreen.classList.add("hide");
@@ -134,10 +132,10 @@ function endQuiz() {
     timerEl.classList.add("hide");
 
     var scoreEl = document.getElementById ("final-score")
-    scoreEl.textContent = "your score is: "+ timerCount + "s"; 
+    scoreEl.textContent = "your score is: "+ timerCount; 
     
 }
-//funtion for user to add initials and to storage results in local storage
+//funtion for user to add initials and to storage initials and score results in local storage
  function saveScore (event) {
     event.preventDefault();
     event.stopPropagation();
@@ -162,7 +160,7 @@ function endQuiz() {
 }
 submitButton.addEventListener("click", saveScore);
 
-//function to show the user score, saved in local storage
+//function to show the user score saved in local storage
 function renderMessage () {
     questionsScreen.classList.add("hide");
     finishScreen.classList.add("hide");
@@ -171,6 +169,7 @@ function renderMessage () {
     scoreScreen.classList.remove("hide");
     document.getElementById("score-list").innerHTML = '';
 
+    //created li element and make a list with the stored user data
     for (let i = 0; i < scoreList.length; i++) {
         const lastGrade = scoreList[i];
         scoresPerInitials= document.createElement("li")
@@ -179,7 +178,7 @@ function renderMessage () {
     }
   }
 
-  //function to go back to the begginig when pressing go back button
+  //function to go back to the beginig when pressing go back button
 function goBack () {
     firstScreen.classList.remove("hide");
     questionsScreen.classList.add("hide");
@@ -193,7 +192,6 @@ function goBack () {
  goBackButton.addEventListener("click", goBack);
 
 //function to erase user quiz data from local storage when pressing clear scores button
-
 clearHighScoreButton.addEventListener("click",function (){
     localStorage.clear();
    //refresh window
@@ -201,6 +199,7 @@ clearHighScoreButton.addEventListener("click",function (){
     document.getElementById("score-list").innerHTML = '';
 });
 
+//function to show score history if user has saved the data
 scoreButton.addEventListener("click",function(){
     if (localStorage !=0) {
         renderMessage();
