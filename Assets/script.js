@@ -21,7 +21,7 @@ var timer;
 var timerEl;
 var timerCount;
 var questionsIndex = 0;
-var userInitials ="";
+var userInitials;
 var scoreList;
 var div;
 
@@ -132,8 +132,7 @@ function endQuiz() {
 
     var scoreEl = document.getElementById ("final-score")
     scoreEl.textContent = "your score is: "+ timerCount + "s"; 
-    //store users score in local storage 
-    localStorage.setItem("score",JSON.stringify(timerCount));
+    
 }
 //funtion for user to add initials and to storage results in local storage
  function saveScore (event) {
@@ -143,12 +142,18 @@ function endQuiz() {
     finishScreen.classList.remove("hide");
     viewScores.classList.add("hide");
     timerEl.classList.add("hide");
-    userInitials = document.getElementById("initials").value;
+    
+    var userInitials = document.getElementById("initials");
     if (userInitials === "") {
         alert("Please enter your initials");
         return endQuiz;
        }
-    localStorage.setItem("initials",userInitials);
+       userInitials
+       var user = {
+        initials: userInitials.value,
+        score: timerCount,
+       };
+    localStorage.setItem("user",JSON.stringify (user));
     renderMessage();     
 }
 submitButton.addEventListener("click", saveScore);
@@ -160,12 +165,8 @@ function renderMessage () {
     viewScores.classList.add("hide");
     timerEl.classList.add("hide");
     scoreScreen.classList.remove("hide");
-    userInitials = localStorage.getItem("initials");
-    score =JSON.parse(localStorage.getItem("score"));
-    document.getElementById("saved-initials").innerHTML = userInitials;
-    div = "------";
-    document.getElementById("div").innerHTML = div;
-    document.getElementById("saved-score").innerHTML = score;
+    var lastGrade = JSON.parse(localStorage.getItem("user"));
+    document.getElementById("div").innerHTML= lastGrade.initials + "----- " + lastGrade.score + "points.";
   }
 
   //function to go back to the begginig when pressing go back button
@@ -190,8 +191,6 @@ function goBack () {
 }
 clearHighScoreButton.addEventListener("click",deleteScore);
 
-//function to show the user data saved in local storage by pressing score button
-
 
 scoreButton.addEventListener("click",function(){
     if (localStorage !=0) {
@@ -199,3 +198,4 @@ scoreButton.addEventListener("click",function(){
         firstScreen.classList.add("hide");
     } 
     });
+
