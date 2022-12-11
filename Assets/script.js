@@ -180,10 +180,8 @@ function goBack () {
 
  function deleteScore () {
     localStorage.clear();
-    questionsScreen.classList.add("hide");
-    finishScreen.classList.add("hide");
-    viewScores.classList.add("hide");
-    timerEl.classList.add("hide");
-    scoreScreen.classList.remove("hide");
+    document.getElementById("saved-initials"). innerHTML = "";
+    document.getElementById("div").innerHTML = "";
+    document.getElementById("saved-score").innerHTML = "";
 }
 clearHighScoreButton.addEventListener("click",deleteScore);
