@@ -196,6 +196,8 @@ function goBack () {
 
 clearHighScoreButton.addEventListener("click",function (){
     localStorage.clear();
+   //refresh window
+    location.reload();
     document.getElementById("score-list").innerHTML = '';
 });
 
