@@ -185,3 +185,4 @@ function goBack () {
     document.getElementById("saved-score").innerHTML = "";
 }
 clearHighScoreButton.addEventListener("click",deleteScore);
+

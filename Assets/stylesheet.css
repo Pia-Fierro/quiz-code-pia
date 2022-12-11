@@ -13,22 +13,58 @@ header {
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
-    font-size: 20px;
     padding: 0 10px 0 10px ;
-    border-radius: 20px;
-    margin: 10px;
+    margin: 20px;
+}
+
+.top-screen-style {
+    background-color: rgb(229, 224, 166);
+    padding: 20px;
+    border-radius: 10px;
 }
 
 main {
     display: flex;
     flex-wrap: wrap;
+    text-align: center;
 }
+#first-screen {
+    border-style: solid;
+    border-color: antiquewhite;
+    width: 70%;
+    margin-left: 200px;
+}
+
+#questions-screen {
+    border-style: solid;
+    border-color: antiquewhite;
+    width: 70%;
+    margin-left: 200px;
+}
+
+#finish-screen {
+    border-style: solid;
+    border-color: antiquewhite;
+    width: 70%;
+    margin-left: 200px;
+}
+
+#score-screen{
+    border-style: solid;
+    border-color: antiquewhite;
+    width: 70%;
+    margin-left: 200px;
+}
+
+ ul{
+    list-style: none;    
+ }
 
 .hide {
     display: none;
 }
 
-.user-scores {
-  display: flex;
-  flex-wrap: wrap;
+.user-scores{
+    display: flex;
+    justify-content: center;
 }
