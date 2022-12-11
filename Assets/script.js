@@ -11,6 +11,7 @@ var choicesList = document.querySelector("#choices");
 var highScores = document.querySelector("#high-scores");
 var titleEl = document.getElementById("questions");
 
+var scoreButton = document.querySelector("#score-button");
 var startQuizButton = document.querySelector("#start-quiz-button");
 var submitButton = document.querySelector("#submit-button");
 var goBackButton = document.querySelector("#go-back-btn");
@@ -143,7 +144,7 @@ function endQuiz() {
     viewScores.classList.add("hide");
     timerEl.classList.add("hide");
     userInitials = document.getElementById("initials").value;
-    if (userInitials == "") {
+    if (userInitials === "") {
         alert("Please enter your initials");
         return endQuiz;
        }
@@ -152,6 +153,7 @@ function endQuiz() {
 }
 submitButton.addEventListener("click", saveScore);
 
+//function to show the user score, saved in local storage
 function renderMessage () {
     questionsScreen.classList.add("hide");
     finishScreen.classList.add("hide");
@@ -166,6 +168,7 @@ function renderMessage () {
     document.getElementById("saved-score").innerHTML = timerCount;
   }
 
+  //function to go back to the begginig when pressing go back button
 function goBack () {
     firstScreen.classList.remove("hide");
     questionsScreen.classList.add("hide");
@@ -178,6 +181,7 @@ function goBack () {
  } 
  goBackButton.addEventListener("click", goBack);
 
+//function to erase user quiz data from local storage when pressing clear scores button
  function deleteScore () {
     localStorage.clear();
     document.getElementById("saved-initials"). innerHTML = "";
@@ -186,3 +190,12 @@ function goBack () {
 }
 clearHighScoreButton.addEventListener("click",deleteScore);
 
+//function to show the user data saved in local storage by pressing score button
+
+function viewScores () {
+
+    if (localStorage !=0) {
+        renderMessage();
+    }
+}
+scoreButton.addEventListener("click",viewScores);
