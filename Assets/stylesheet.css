@@ -28,6 +28,13 @@ main {
     flex-wrap: wrap;
     text-align: center;
 }
+
+#score-button{
+    background-color: rgb(229, 224, 166);
+    border: none;
+    font-size: 20px;
+}
+
 #first-screen {
     border-style: solid;
     border-color: antiquewhite;

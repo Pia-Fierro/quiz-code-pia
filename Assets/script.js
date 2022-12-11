@@ -165,7 +165,7 @@ function renderMessage () {
     document.getElementById("saved-initials").innerHTML = userInitials;
     div = "------";
     document.getElementById("div").innerHTML = div;
-    document.getElementById("saved-score").innerHTML = timerCount;
+    document.getElementById("saved-score").innerHTML = score;
   }
 
   //function to go back to the begginig when pressing go back button
@@ -192,10 +192,10 @@ clearHighScoreButton.addEventListener("click",deleteScore);
 
 //function to show the user data saved in local storage by pressing score button
 
-function viewScores () {
 
+scoreButton.addEventListener("click",function(){
     if (localStorage !=0) {
         renderMessage();
-    }
-}
-scoreButton.addEventListener("click",viewScores);
+        firstScreen.classList.add("hide");
+    } 
+    });
