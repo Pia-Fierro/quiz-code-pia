@@ -25,7 +25,7 @@ THEN I can save my initials and my score
 ```
 
 # Screenshot:
-![Code quiz](./Assets/screenshot.jpg)
+![Code quiz](./Assets/images/screenshot.jpg)
 
 # Link to deploy application
 
