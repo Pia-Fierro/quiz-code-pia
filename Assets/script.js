@@ -9,7 +9,6 @@ var viewScores = document.querySelector("#view-scores");
 var timerEl = document.querySelector("#timer-count");
 var choicesList = document.querySelector("#choices");
 var highScores = document.querySelector("#high-scores");
-//var scoreList = document.createElement("ul")
 var titleEl = document.getElementById("questions");
 
 var scoreButton = document.querySelector("#score-button");
@@ -205,5 +204,6 @@ scoreButton.addEventListener("click",function(){
         renderMessage();
     }
     firstScreen.classList.add("hide");
+    scoreScreen.classList.remove("hide");
     });
 
